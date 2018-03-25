@@ -63,7 +63,7 @@ def register_in_teamify(user_id):
 
     teamify_autoregister_url = "https://teamder.eu.meteorapp.com/auto-signup/email={email}"
     send_message_to_user(user_id, "Plz register via this link" +
-                                 teamify_autoregister_url.format(email=["user"]["profile"]["email"])
+                                 teamify_autoregister_url.format(email=r["user"]["profile"]["email"])
                         )
 
 
