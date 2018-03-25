@@ -64,7 +64,7 @@ def parse_join(message):
           data = data.update({'unfurl_link': 'false'})
 
         xx = requests.post("https://slack.com/api/chat.postMessage", data=data)
-        logging.debug('\033[91m' + "HELLO SENT TO " + m["user"]["id"] + '\033[0m')
+        logging.debug('\033[91m' + "HELLO SENT TO " + user_id + '\033[0m')
 
 
         register_in_teamify(user_id)
