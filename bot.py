@@ -33,7 +33,7 @@ def is_debug_channel_join(msg):
     return msg['type'] == "member_joined_channel" and msg['channel'] == DEBUG_CHANNEL_ID and msg['channel_type'] == 'C'
 
 def register_in_teamify(email, first_name, last_name):
-
+    pass
 
 def parse_join(message):
     m = json.loads(message)
