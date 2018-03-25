@@ -1,4 +1,4 @@
-# This is Teamify Bot
+# This is Teamify Bot.
 ---------------------
 
 # Greetings Slackers
