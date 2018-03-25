@@ -37,7 +37,7 @@ def register_in_teamify(email, first_name, last_name):
 
 def parse_join(message):
     m = json.loads(message)
-    if is_team_join(m) or is_debug_channel_join(m):
+    if True: #is_team_join(m) or is_debug_channel_join(m):
         print(message)
         user_id = m["user"]["id"] if is_team_join(m) else m["user"]
         logging.debug(m)
