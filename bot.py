@@ -32,6 +32,29 @@ def is_team_join(msg):
 def is_debug_channel_join(msg):
     return msg['type'] == "member_joined_channel" and msg['channel'] == DEBUG_CHANNEL_ID and msg['channel_type'] == 'C'
 
+
+def send_message_to_user(user_id, message):
+    x = requests.get("https://slack.com/api/im.open?token="+TOKEN+"&user="+user_id)
+    x = x.json()
+    x = x["channel"]["id"]
+    logging.debug(x)
+
+    data = {
+        'token': TOKEN,
+        'channel': x,
+        'text': message,
+        'parse': 'full',
+        'as_user': 'true',
+    }
+
+    logging.debug(data)
+
+    if (UNFURL.lower() == "false"):
+      data = data.update({'unfurl_link': 'false'})
+
+    xx = requests.post("https://slack.com/api/chat.postMessage", data=data)
+    logging.debug('\033[91m' + "HELLO SENT TO " + user_id + '\033[0m')
+
 def register_in_teamify(user_id):
     profile_info_url = "https://slack.com/api/users.info?token={token}&user={user_id}&pretty=1"
 
@@ -45,27 +68,8 @@ def parse_join(message):
     if is_team_join(m) or is_debug_channel_join(m):
         user_id = m["user"]["id"] if is_team_join(m) else m["user"]
         logging.debug(m)
-        x = requests.get("https://slack.com/api/im.open?token="+TOKEN+"&user="+user_id)
-        x = x.json()
-        x = x["channel"]["id"]
-        logging.debug(x)
 
-        data = {
-                'token': TOKEN,
-                'channel': x,
-                'text': MESSAGE,
-                'parse': 'full',
-                'as_user': 'true',
-                }
-
-        logging.debug(data)
-
-        if (UNFURL.lower() == "false"):
-          data = data.update({'unfurl_link': 'false'})
-
-        xx = requests.post("https://slack.com/api/chat.postMessage", data=data)
-        logging.debug('\033[91m' + "HELLO SENT TO " + user_id + '\033[0m')
-
+        send_message_to_user(user_id, MESSAGE)
 
         register_in_teamify(user_id)
 
