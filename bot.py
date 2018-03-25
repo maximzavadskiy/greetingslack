@@ -32,8 +32,13 @@ def is_team_join(msg):
 def is_debug_channel_join(msg):
     return msg['type'] == "member_joined_channel" and msg['channel'] == DEBUG_CHANNEL_ID and msg['channel_type'] == 'C'
 
-def register_in_teamify(email, first_name, last_name):
-    pass
+def register_in_teamify(user_id):
+    profile_info_url = "https://slack.com/api/users.info?token={token}&user={user_id}&pretty=1"
+
+    r = requests.get(profile_info_url.format(token=TOKEN, user_id=user_id), verify=False)
+    r = r.json()
+    logging.debug(r)
+
 
 def parse_join(message):
     m = json.loads(message)
@@ -62,7 +67,7 @@ def parse_join(message):
         logging.debug('\033[91m' + "HELLO SENT TO " + m["user"]["id"] + '\033[0m')
 
 
-        register_in_teamify()
+        register_in_teamify(user_id)
 
 #Connects to Slacks and initiates socket handshake
 def start_rtm():
