@@ -61,7 +61,7 @@ def register_in_teamify(user_id):
     r = requests.get(profile_info_url.format(token=TOKEN, user_id=user_id), verify=False)
     r = r.json()
 
-    private_chat_url = "https://slack.com/app_redirect?channel={user_id}&team=T9SS6CSMV".format(user_id=user_id)
+    private_chat_url = urllib.quote("https://slack.com/app_redirect?channel={user_id}&team=T9SS6CSMV".format(user_id=user_id), safe='')
 
     teamify_autoregister_url = "https://teamder.eu.meteorapp.com/auto-signup/email={email}/private-chat-link={private_chat_url}".format(email=r["user"]["profile"]["email"], private_chat_url=private_chat_url)
     send_message_to_user(user_id, "Plz register via this link: " + teamify_autoregister_url)
