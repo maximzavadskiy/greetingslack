@@ -9,14 +9,17 @@
   "website": "https://github.com/orliesaurus/greetingslack",
   "repository": "https://github.com/orliesaurus/greetingslack",
   "env": {
-    "SLACK_TOKEN": {
-      "description": "Your Slack API Token",
-      "value": "1234-12314123123-123123123",
+    "SERVER_URL": {
+      "value": "same url as given to participants",
       "required": "true"
     },
-    "UNFURL_LINKS": {
-      "description": "We UNFURL only the last link by default, trust me its good",
-      "value": "true"
+    "BOT_USERNAME": {
+      "value": "create it in admin",
+      "required": "true"
+    },
+    "BOT_PASS": {
+      "value": "create it it admin",
+      "required": "true"
     },
     "WELCOME_MESSAGE": {
       "description": "Your Welcome message string",
